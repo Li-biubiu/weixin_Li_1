@@ -29,6 +29,7 @@
 	</properties>
 
 	<dependencies>
+	
 	    <!--JAXB的API，一般引入spring,JPI相关的依赖，以后都有  -->    
 	    <dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -46,6 +47,7 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.3.2</version>
 		</dependency>
+	
 	
 	    <!-- 加入Spring Data JPA的依赖，会自动下载Hibernate等相关的依赖文件，而且会自动完成配置 -->
 		<dependency>
