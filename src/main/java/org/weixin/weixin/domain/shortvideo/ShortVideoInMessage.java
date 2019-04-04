@@ -26,4 +26,28 @@ public class ShortVideoInMessage extends InMessage {
 		super.setMsgType("shortvideo");
 	}
 
+	public String getMediaId() {
+		return MediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		MediaId = mediaId;
+	}
+
+	public String getThumbMediaId() {
+		return ThumbMediaId;
+	}
+
+	public void setThumbMediaId(String thumbMediaId) {
+		ThumbMediaId = thumbMediaId;
+	}
+
+	@Override
+	public String toString() {
+		return "ShortVideoInMessage [MediaId=" + MediaId + ", ThumbMediaId=" + ThumbMediaId + ", getToUserName()="
+				+ getToUserName() + ", getFromUserName()=" + getFromUserName() + ", getCreateTime()=" + getCreateTime()
+				+ ", getMsgType()=" + getMsgType() + ", getMsgId()=" + getMsgId() + "]";
+	}
+
+	
 }

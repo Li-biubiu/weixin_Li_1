@@ -39,6 +39,13 @@ public class VoiceInMessage extends InMessage {
 	public void setMediaId(String mediaId) {
 		MediaId = mediaId;
 	}
+
+	@Override
+	public String toString() {
+		return "VoiceInMessage [Format=" + Format + ", MediaId=" + MediaId + ", getToUserName()=" + getToUserName()
+				+ ", getFromUserName()=" + getFromUserName() + ", getCreateTime()=" + getCreateTime()
+				+ ", getMsgType()=" + getMsgType() + ", getMsgId()=" + getMsgId() + "]";
+	}
 	
 	
 }

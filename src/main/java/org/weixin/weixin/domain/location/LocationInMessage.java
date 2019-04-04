@@ -64,6 +64,14 @@ public class LocationInMessage extends InMessage {
 	public void setLabel(String label) {
 		Label = label;
 	}
+
+	@Override
+	public String toString() {
+		return "LocationInMessage [Location_X=" + Location_X + ", Location_Y=" + Location_Y + ", Scale=" + Scale
+				+ ", Label=" + Label + ", getToUserName()=" + getToUserName() + ", getFromUserName()="
+				+ getFromUserName() + ", getCreateTime()=" + getCreateTime() + ", getMsgType()=" + getMsgType()
+				+ ", getMsgId()=" + getMsgId() + "]";
+	}
 	
 	
 }

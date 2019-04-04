@@ -53,6 +53,13 @@ public class LinkInMessage extends InMessage {
 	public void setUrl(String url) {
 		Url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "LinkInMessage [Title=" + Title + ", Description=" + Description + ", Url=" + Url + ", getToUserName()="
+				+ getToUserName() + ", getFromUserName()=" + getFromUserName() + ", getCreateTime()=" + getCreateTime()
+				+ ", getMsgType()=" + getMsgType() + ", getMsgId()=" + getMsgId() + "]";
+	}
 	
 	
 	
