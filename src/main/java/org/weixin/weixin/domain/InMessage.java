@@ -67,11 +67,11 @@ public class InMessage {
 		this.msgType = msgType;
 	}
 
-	public long getMsgId() {
+	public Long getMsgId() {
 		return msgId;
 	}
 
-	public void setMsgId(long msgId) {
+	public void setMsgId(Long msgId) {
 		this.msgId = msgId;
 	}
 	
