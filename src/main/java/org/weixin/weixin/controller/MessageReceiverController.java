@@ -1,11 +1,22 @@
 package org.weixin.weixin.controller;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.StringReader;
 
 import javax.xml.bind.JAXB;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +39,9 @@ public class MessageReceiverController {
 	//日志记录器
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
 	
+	@Autowired
+	@Qualifier("inMessageTemplate")
+	private RedisTemplate<String,InMessage> inMessageTemplate;
 	
 	@GetMapping //只处理GET请求
 	public String echo( 
@@ -78,6 +92,47 @@ public class MessageReceiverController {
 		InMessage inMessage = JAXB.unmarshal(new StringReader(xml), cla);
 		
 		LOG.debug("转换得到的消息对象:  /n{}/n",inMessage.toString());
+		
+		// 消息放入消息队列
+		inMessageTemplate.execute(new  RedisCallback<String>() {
+
+			@Override
+			public String doInRedis(RedisConnection connection) throws DataAccessException {
+				try {
+				// 发布消息的时候，需要准备两个byte[]
+				// 一个作为通道名称来使用，类似于无线电广播，不同的频道声音。通道名称是Redis用来隔离不同数据
+				// 比如文本消息，图片消息处理方式不同，所有使用前缀来隔离：TEXT* 表示文本消息  IMAGE* 表示图片消息。
+				// 建议在多人共享一个服务器的时候，每个人使用不同的数据库实例即可,并且建议在通道名称之前加上反向代理的前缀。
+				
+				String channel = "ljh_1" + inMessage.getMsgType();
+				
+				// 消息内容要自己序列化才能放入队列中
+				ByteArrayOutputStream out = new ByteArrayOutputStream(); // 输入流
+				ObjectOutputStream oos = new ObjectOutputStream(out);
+				oos.writeObject(inMessage);
+				
+				Long l = connection.publish(channel.getBytes() , out.toByteArray());
+				System.out.println("发布结果：" + l);
+				} catch (Exception e){
+					LOG.error("把消息放入队列是出现问题：" + e.getLocalizedMessage() , e);
+				}
+				return null;
+			}
+			
+		});
+		
+		
+		
+//		inMessageTemplate.execute(new SessionCallback<String>() {
+//
+//			@Override
+//			public <K, V> String execute(RedisOperations<K, V> operations) throws DataAccessException {
+//				operations
+//				return null;
+//			}
+//			
+//			
+//		});
 		
 		return "success";
 	}

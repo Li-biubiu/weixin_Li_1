@@ -12,6 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "xml")
 public class VoiceInMessage extends InMessage {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@XmlElement(name = "Format")
 	@JsonProperty("Format")
 	private String  Format;

@@ -14,6 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "xml")
 public class LinkInMessage extends InMessage {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@XmlElement(name = "Title")
 	@JsonProperty("Title")
 	private String  Title;

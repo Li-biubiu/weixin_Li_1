@@ -14,6 +14,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "xml")
 public class VideoInMessage extends InMessage {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@XmlElement(name = "ThumbMediaId")
 	@JsonProperty("ThumbMediaId")
 	private String  ThumbMediaId;
