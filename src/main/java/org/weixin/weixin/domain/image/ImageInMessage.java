@@ -13,6 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "xml")
 public class ImageInMessage extends InMessage {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@XmlElement(name = "PicUrl")
 	@JsonProperty("PicUrl")
 	private String  url;
