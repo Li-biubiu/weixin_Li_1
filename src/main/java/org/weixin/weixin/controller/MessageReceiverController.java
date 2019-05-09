@@ -1,4 +1,4 @@
-package org.weixin.weixin.controller;
+ package org.weixin.weixin.controller;
 
 
 import java.io.ByteArrayOutputStream;
@@ -94,7 +94,7 @@ public class MessageReceiverController {
 		
 		LOG.debug("转换得到的消息对象:  /n{}/n",inMessage.toString());
 		
-		
+		// 使用默认的序列化程序来实现序列化
 		inMessageTemplate.convertAndSend("ljh_1" + inMessage.getMsgType(), inMessage);
 		
 		
