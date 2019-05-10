@@ -13,17 +13,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.weixin.weixin.domain.InMessage;
 
 
-public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<InMessage> {
+public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	public JsonRedisSerializer( ) {
-		super(InMessage.class);
+		super(Object.class);
 	}
 	
 	// 序列化对的时候调用的方法，负责把InMessage转换为byte[]
 	@Override
-	public byte[] serialize(InMessage t) throws SerializationException {
+	public byte[] serialize(Object t) throws SerializationException {
 		// 我们现在希望把对象序列化成JSON字符串，但是JSON字符串本身是不确定对象的类型， 所以需要扩展：
 		// 序列化的时候先把类名的长度写出去，再写出类名，最后再写出JSON字符串。
 		
@@ -54,7 +54,7 @@ public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<InMessage> 
 	
 	// 在反序列化的时候被调用的方法，负责把字节数组转换为InMessage
 	@Override
-	public InMessage deserialize(byte[] bytes) throws SerializationException {
+	public Object deserialize(byte[] bytes) throws SerializationException {
 		
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 		DataInputStream DataInputStream = new DataInputStream(byteArrayInputStream);

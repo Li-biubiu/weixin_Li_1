@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.weixin.weixin.domain.InMessage;
 import org.weixin.weixin.service.JsonRedisSerializer;
 
+
+
 @SpringBootApplication
 public class WeixinApplication {
 	
@@ -26,7 +28,7 @@ public class WeixinApplication {
 		
 		// 由于不确定是哪个类型，InMessage只是一个父类，它有许多不同的子类
 		// 因此扩展Jackson2JsonRedisSerizlizer变得极其重要，重写方法，不要构造参数
-		// template.setValueSerializer(new JsonRedisSerializer());
+		template.setValueSerializer(new JsonRedisSerializer());
 		
 		
 		
