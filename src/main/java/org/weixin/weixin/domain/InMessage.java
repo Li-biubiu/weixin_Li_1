@@ -80,4 +80,11 @@ public abstract class InMessage implements Serializable {
 	public void setMsgId(Long msgId) {
 		this.msgId = msgId;
 	}
+
+	@Override
+	public String toString() {
+		return "InMessage [toUserName=" + toUserName + ", fromUserName=" + fromUserName + ", createTime=" + createTime
+				+ ", msgType=" + msgType + ", msgId=" + msgId + "]";
+	}
+	
 }
