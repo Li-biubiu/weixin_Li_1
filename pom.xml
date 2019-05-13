@@ -101,6 +101,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- 可以打包成一个可执行jar文件 -->
+					<executable>true</executable>
+					<!-- fork为true的时候，将可以使用mvn spring-boot:start启动程序，-->
+					<!--并且可以使用mvn spring-boot:stop停止程序 -->
+					<fork>true</fork>
+					
+					<!-- 每个fork出来的进程都会需要一个JMX端口，不能重复 -->
+					<!-- 默认9001 -->
+					<!-- 建议:每个人使用一段的端口号，比如张三使用 9001-9099，李四使用 9100-9199 -->
+					<jmxPort>9100</jmxPort>
+					
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
